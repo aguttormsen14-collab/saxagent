@@ -1,4 +1,4 @@
-﻿export default async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
