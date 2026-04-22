@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ API ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
+//
 async function callClaude(system, userMessage, history = []) {
   const messages = [...history, { role: "user", content: userMessage }];
   const res = await fetch("/api/chat", {
@@ -12,54 +12,54 @@ async function callClaude(system, userMessage, history = []) {
   return data.content?.map(b => b.text || "").join("") || "Ingen respons.";
 }
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ SYSTEM PROMPTS ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
-const CONTEXT = `Du jobber som AI-assistent for Saxvik Kontorsenter AS i Steinkjer, Tr├â┬©ndelag.
-Saxvik selger: interaktive skjermer (m├â┬©terom, klasserom, auditorium), kasse- og betalingsl├â┬©sninger, 
-postbehandling/makulering, arkivl├â┬©sninger, LED-skjermer, kontorteknologi. Hovedleverand├â┬©r: Canon.
-Marked: bedrifter nord i Tr├â┬©ndelag. Omsetning ~45 mill, 12 ansatte. Team Tek er tech-avdelingen.
-Skriv alltid p├â┬Ñ norsk. V├â┬ªr konkret, ikke generell.`;
+//
+const CONTEXT = `Du jobber som AI-assistent for Saxvik Kontorsenter AS i Steinkjer, Trøndelag.
+Saxvik selger: interaktive skjermer (møterom, klasserom, auditorium), kasse- og betalingsløsninger, 
+postbehandling/makulering, arkivløsninger, LED-skjermer, kontorteknologi. Hovedleverandør: Canon.
+Marked: bedrifter nord i Trøndelag. Omsetning ~45 mill, 12 ansatte. Team Tek er tech-avdelingen.
+Skriv alltid på norsk. Vær konkret, ikke generell.`;
 
 const SYSTEMS = {
   summary: `${CONTEXT}
-Du er referatskriver. Gj├â┬©r r├â┬Ñnotater om til et profesjonelt referat.
-Struktur: **M├â┬©te/dato** | **Tilstede** | **N├â┬©kkelpunkter** (bullet) | **Beslutninger** | **Handlingspunkter** (ansvarlig + frist) | **Neste steg**
+Du er referatskriver. Gjør rånotater om til et profesjonelt referat.
+Struktur: **Møte/dato** | **Tilstede** | **Nøkkelpunkter** (bullet) | **Beslutninger** | **Handlingspunkter** (ansvarlig + frist) | **Neste steg**
 Fyll ikke inn info som ikke er i notatene. Skriv [ikke oppgitt] der noe mangler.`,
 
   followup: `${CONTEXT}
-Du skriver oppf├â┬©lgingsmailer basert p├â┬Ñ m├â┬©tereferater. 
-Tonen skal v├â┬ªre varm, profesjonell og personlig ├óÔé¼ÔÇ£ ikke generisk selgermail.
-Struktur: Takk for m├â┬©tet ├óÔÇáÔÇÖ oppsummer det viktigste kunden sa ├óÔÇáÔÇÖ konkret neste steg ├óÔÇáÔÇÖ enkel call to action.
+Du skriver oppfølgingsmailer basert på møtereferater. 
+Tonen skal være varm, profesjonell og personlig - ikke generisk selgermail.
+Struktur: Takk for møtet -> oppsummer det viktigste kunden sa -> konkret neste steg -> enkel call to action.
 Ikke overselg. Ikke bruk buzzwords. Maks 150 ord i selve mailen.
 Returner: EMNE: [emne]\n\n[mailinnhold]`,
 
   call: `${CONTEXT}
 Du er en erfaren salgscoach som lager tilpassede samtaleguider for selgere.
 Brukeren gir deg info om kunden/prospektet. Du lager:
-1. **├âÔÇªpning** (15 sek, naturlig ├óÔé¼ÔÇ£ ikke robotaktig)
-2. **3-4 ├â┬Ñpne sp├â┬©rsm├â┬Ñl** tilpasset kundens situasjon
+1. **Åpning** (15 sek, naturlig - ikke robotaktig)
+2. **3-4 åpne spørsmål** tilpasset kundens situasjon
 3. **Verdiforslag** for Saxvik rettet mot akkurat denne kunden
-4. **H├â┬Ñndtering av vanlige innvendinger** (for dyrt / har l├â┬©sning / ikke tid)
-5. **Avslutning** ├óÔé¼ÔÇ£ hvordan booke m├â┬©te eller neste steg
+4. **Håndtering av vanlige innvendinger** (for dyrt / har løsning / ikke tid)
+5. **Avslutning** - hvordan booke møte eller neste steg
 Tilpass ALT til bransje og situasjon. Ingen generiske fraser.`,
 
   meetingprep: `${CONTEXT}
-Du forbereder selgere til kundem├â┬©ter. Brukeren gir deg bedriftsnavn og eventuell info.
-Lag et m├â┬©tebrief med:
-1. **Hva vi vet om bedriften** (bransje, st├â┬©rrelse, trolig behov)
-2. **Mulige smertepunkter** Saxvik kan l├â┬©se
-3. **Anbefalte produkter/l├â┬©sninger ├â┬Ñ presentere**
-4. **5 gode sp├â┬©rsm├â┬Ñl ├â┬Ñ stille i m├â┬©tet**
-5. **Hva du b├â┬©r unng├â┬Ñ ├â┬Ñ si**
-6. **M├â┬Ñlet for m├â┬©tet** ├óÔé¼ÔÇ£ hva er en god utgang?
-V├â┬ªr konkret og praktisk.`,
+Du forbereder selgere til kundemøter. Brukeren gir deg bedriftsnavn og eventuell info.
+Lag et møtebrief med:
+1. **Hva vi vet om bedriften** (bransje, størrelse, trolig behov)
+2. **Mulige smertepunkter** Saxvik kan løse
+3. **Anbefalte produkter/løsninger å presentere**
+4. **5 gode spørsmål å stille i møtet**
+5. **Hva du bør unngå å si**
+6. **Målet for møtet** - hva er en god utgang?
+Vær konkret og praktisk.`,
 
   linkedin: `${CONTEXT}
 Du er LinkedIn SEO-ekspert for B2B-selgere i Norge.
-N├â┬Ñr du lager innlegg: skriv for verdi ikke reklame, bruk linjeskift, avslutt med sp├â┬©rsm├â┬Ñl, ingen lenker i innlegget.
+Når du lager innlegg: skriv for verdi ikke reklame, bruk linjeskift, avslutt med spørsmål, ingen lenker i innlegget.
 Returner alltid: [Innlegg] | [Hashtags 5-8 stk] | [Tips]`,
 };
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ LOCAL STORAGE ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
+//
 function loadCustomers() {
   try { return JSON.parse(localStorage.getItem("saxvik_customers") || "[]"); } catch { return []; }
 }
@@ -67,13 +67,13 @@ function saveCustomers(list) {
   localStorage.setItem("saxvik_customers", JSON.stringify(list));
 }
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ ICONS ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
+//
 const icons = {
-  customers: "├░┼©ÔÇÿ┬Ñ", call: "├░┼©ÔÇ£┼¥", meeting: "├░┼©┬ñ┬Ø", linkedin: "├░┼©ÔÇÖ┬╝", notes: "├░┼©ÔÇ£ÔÇ╣",
-  add: "+", back: "├óÔÇá┬É", mail: "├ó┼ôÔÇ░├»┬©┬Å", save: "├░┼©ÔÇÖ┬¥", copy: "├ó┬ºÔÇ░", check: "├ó┼ôÔÇ£", trash: "├░┼©ÔÇöÔÇÿ",
+  customers: "K", call: "T", meeting: "M", linkedin: "L", notes: "N",
+  add: "+", back: "<-", mail: "@", save: "S", copy: "K", check: "OK", trash: "X",
 };
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ COLOURS ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
+//
 const C = {
   bg: "#080e1a",
   surface: "#0e1929",
@@ -88,7 +88,7 @@ const C = {
   successDim: "rgba(34,197,94,0.15)",
 };
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ SHARED COMPONENTS ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
+//
 function Btn({ children, onClick, disabled, variant = "primary", small }) {
   const base = {
     border: "none", borderRadius: 10, cursor: disabled ? "not-allowed" : "pointer",
@@ -131,7 +131,7 @@ function ResultBox({ content, onCopy, copied }) {
   );
 }
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ VIEWS ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
+//
 
 // Customer List
 function CustomerList({ customers, onSelect, onNew }) {
@@ -149,12 +149,12 @@ function CustomerList({ customers, onSelect, onNew }) {
         <Btn onClick={onNew}>{icons.add} Ny kunde</Btn>
       </div>
 
-      <input value={search} onChange={e => setSearch(e.target.value)} placeholder="S├â┬©k kunde eller kontaktperson..."
+      <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Søk kunde eller kontaktperson..."
         style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "11px 16px", color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", width: "100%", boxSizing: "border-box" }} />
 
       {filtered.length === 0 && (
         <Card style={{ textAlign: "center", color: C.muted, padding: "40px 24px" }}>
-          {search ? "Ingen treff" : "Ingen kunder enn├â┬Ñ ├óÔé¼ÔÇ£ legg til din f├â┬©rste!"}
+          {search ? "Ingen treff" : "Ingen kunder ennå - legg til din første!"}
         </Card>
       )}
 
@@ -165,7 +165,7 @@ function CustomerList({ customers, onSelect, onNew }) {
             onMouseLeave={e => e.currentTarget.style.background = C.surface}>
             <div>
               <div style={{ fontWeight: 700, color: "#e8f2ff", fontSize: 15 }}>{c.name}</div>
-              <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>{c.contact} {c.industry ? `├é┬À ${c.industry}` : ""}</div>
+              <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>{c.contact} {c.industry ? `· ${c.industry}` : ""}</div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
               <Tag label={c.status || "prospect"} color={statusColor[c.status] || C.accent} />
@@ -218,7 +218,7 @@ function NewCustomer({ onSave, onBack }) {
 
         <div>
           <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>Notater</div>
-          <Textarea value={form.notes} onChange={set("notes")} placeholder="F├â┬©rste inntrykk, potensial, hvordan ble de funnet..." rows={3} />
+          <Textarea value={form.notes} onChange={set("notes")} placeholder="Første inntrykk, potensial, hvordan ble de funnet..." rows={3} />
         </div>
       </Card>
 
@@ -276,7 +276,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
     setTab("logg");
   }
 
-  const detailTabs = ["logg", "nytt m├â┬©te"];
+  const detailTabs = ["logg", "nytt møte"];
   const statusColor = { prospect: "#f59e0b", aktiv: C.success, inaktiv: C.muted };
 
   return (
@@ -290,7 +290,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
             <Tag label={customer.status || "prospect"} color={statusColor[customer.status] || C.accent} />
           </div>
           <div style={{ fontSize: 13, color: C.muted, marginTop: 4 }}>
-            {[customer.contact, customer.phone, customer.email, customer.industry].filter(Boolean).join(" ├é┬À ")}
+            {[customer.contact, customer.phone, customer.email, customer.industry].filter(Boolean).join(" · ")}
           </div>
         </div>
       </div>
@@ -300,7 +300,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
         {detailTabs.map(t => (
           <button key={t} onClick={() => setTab(t)}
             style={{ padding: "9px 18px", border: "none", background: "transparent", color: tab === t ? C.accent : C.muted, fontWeight: tab === t ? 700 : 400, fontSize: 14, cursor: "pointer", borderBottom: tab === t ? `2px solid ${C.accent}` : "2px solid transparent", fontFamily: "inherit", textTransform: "capitalize" }}>
-            {t === "logg" ? "├░┼©ÔÇ£ÔÇ╣ Logg" : "├ó┼ô┬Å├»┬©┬Å Nytt m├â┬©te"}
+            {t === "logg" ? "Logg" : "Nytt møte"}
           </button>
         ))}
       </div>
@@ -315,7 +315,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
             </Card>
           )}
           {(customer.logs || []).length === 0 && !customer.notes && (
-            <Card style={{ textAlign: "center", color: C.muted, padding: "40px 24px" }}>Ingen m├â┬©ter logget enn├â┬Ñ</Card>
+            <Card style={{ textAlign: "center", color: C.muted, padding: "40px 24px" }}>Ingen møter logget ennå</Card>
           )}
           {(customer.logs || []).map(log => (
             <Card key={log.id}>
@@ -325,7 +325,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
               <div style={{ fontSize: 14, color: C.text, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{log.summary}</div>
               {log.followup && (
                 <div style={{ marginTop: 14, paddingTop: 14, borderTop: `1px solid ${C.border}` }}>
-                  <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>{icons.mail} Oppf├â┬©lgingsmail</div>
+                  <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>{icons.mail} Oppfølgingsmail</div>
                   <div style={{ fontSize: 13, color: "#9ab8cc", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{log.followup}</div>
                   <button onClick={() => copy(log.followup, log.id)} style={{ marginTop: 10, background: "none", border: `1px solid ${C.border}`, borderRadius: 8, color: C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer" }}>
                     {copied === log.id ? `${icons.check} Kopiert` : `${icons.copy} Kopier mail`}
@@ -338,19 +338,19 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
       )}
 
       {/* New meeting tab */}
-      {tab === "nytt m├â┬©te" && (
+      {tab === "nytt møte" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card>
-            <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>R├â┬Ñnotater fra m├â┬©tet</div>
+            <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>Rånotater fra møtet</div>
             <Textarea value={noteInput} onChange={setNoteInput} placeholder={`Hva ble diskutert med ${customer.name}?\n- Problem de nevnte\n- Produkter som er aktuelle\n- Hvem bestemmer\n- Neste steg`} rows={6} />
           </Card>
 
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <Btn onClick={handleGenerateSummary} disabled={!noteInput.trim() || loading === "summary"}>
-              {loading === "summary" ? "├ó┬Å┬│ Genererer..." : "├░┼©ÔÇ£ÔÇ╣ Generer referat"}
+              {loading === "summary" ? "Genererer..." : "Generer referat"}
             </Btn>
             <Btn onClick={handleGenerateFollowup} disabled={(!noteInput.trim() && !summary.trim()) || loading === "followup"} variant="ghost">
-              {loading === "followup" ? "├ó┬Å┬│ Skriver mail..." : `${icons.mail} Generer oppf├â┬©lgingsmail`}
+              {loading === "followup" ? "óÅ Skriver mail..." : `${icons.mail} Generer oppfølgingsmail`}
             </Btn>
           </div>
 
@@ -363,7 +363,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
 
           {followup && (
             <div>
-              <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>Oppf├â┬©lgingsmail</div>
+              <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>Oppfølgingsmail</div>
               <ResultBox content={followup} onCopy={() => copy(followup, "fu")} copied={copied === "fu"} />
             </div>
           )}
@@ -388,7 +388,7 @@ function CallAssistant() {
   async function generate() {
     if (!form.company.trim()) return;
     setLoading(true);
-    const prompt = `Bedrift: ${form.company}\nBransje: ${form.industry || "ukjent"}\nSt├â┬©rrelse: ${form.size || "ukjent"}\nKontekst: ${form.context || "kald kontakt"}\nAktuelt produkt/l├â┬©sning: ${form.product || "generell kartlegging"}`;
+    const prompt = `Bedrift: ${form.company}\nBransje: ${form.industry || "ukjent"}\nStørrelse: ${form.size || "ukjent"}\nKontekst: ${form.context || "kald kontakt"}\nAktuelt produkt/løsning: ${form.product || "generell kartlegging"}`;
     const res = await callClaude(SYSTEMS.call, prompt);
     setResult(res);
     setLoading(false);
@@ -398,16 +398,16 @@ function CallAssistant() {
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
         <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>Samtaleguide</div>
-        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>For cold calls, oppf├â┬©lging og kundedialog</div>
+        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>For cold calls, oppfølging og kundedialog</div>
       </div>
 
       <Card style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {[
           ["Bedrift / person *", "company", "Rema 1000 Steinkjer"],
           ["Bransje", "industry", "Dagligvare, skole, restaurant, industri..."],
-          ["St├â┬©rrelse", "size", "Liten, 10-50 ansatte, stor kjede..."],
-          ["Kontekst", "context", "Kald kontakt / oppf├â┬©lging etter mail / referral fra X"],
-          ["Aktuelt produkt", "product", "Kassel├â┬©sning, interaktiv skjerm, m├â┬©teromsutstyr..."],
+          ["Størrelse", "size", "Liten, 10-50 ansatte, stor kjede..."],
+          ["Kontekst", "context", "Kald kontakt / oppfølging etter mail / referral fra X"],
+          ["Aktuelt produkt", "product", "Kasseløsning, interaktiv skjerm, møteromsutstyr..."],
         ].map(([label, key, ph]) => (
           <div key={key}>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
@@ -416,7 +416,7 @@ function CallAssistant() {
           </div>
         ))}
         <Btn onClick={generate} disabled={!form.company.trim() || loading}>
-          {loading ? "├ó┬Å┬│ Lager guide..." : "├░┼©ÔÇ£┼¥ Generer samtaleguide"}
+          {loading ? "Lager guide..." : "Generer samtaleguide"}
         </Btn>
       </Card>
 
@@ -436,7 +436,7 @@ function MeetingPrep() {
   async function generate() {
     if (!form.company.trim()) return;
     setLoading(true);
-    const prompt = `Bedrift: ${form.company}\nKontaktperson: ${form.contact || "ukjent"}\nBransje: ${form.industry || "ukjent"}\nHva vi vet: ${form.known || "ingenting enn├â┬Ñ"}\nM├â┬Ñl med m├â┬©tet: ${form.goal || "kartlegge behov"}`;
+    const prompt = `Bedrift: ${form.company}\nKontaktperson: ${form.contact || "ukjent"}\nBransje: ${form.industry || "ukjent"}\nHva vi vet: ${form.known || "ingenting ennå"}\nMål med møtet: ${form.goal || "kartlegge behov"}`;
     const res = await callClaude(SYSTEMS.meetingprep, prompt);
     setResult(res);
     setLoading(false);
@@ -445,8 +445,8 @@ function MeetingPrep() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
-        <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>M├â┬©teforberedelse</div>
-        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>Kom forberedt til hvert m├â┬©te</div>
+        <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>Møteforberedelse</div>
+        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>Kom forberedt til hvert møte</div>
       </div>
 
       <Card style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -455,7 +455,7 @@ function MeetingPrep() {
           ["Kontaktperson", "contact", "Rektor / IT-ansvarlig"],
           ["Bransje", "industry", "Utdanning, helse, handel..."],
           ["Hva vi allerede vet", "known", "Ringte i forrige uke, interessert i skjermer..."],
-          ["M├â┬Ñl med m├â┬©tet", "goal", "Demo, behovskartlegging, tilbud..."],
+          ["Mål med møtet", "goal", "Demo, behovskartlegging, tilbud..."],
         ].map(([label, key, ph]) => (
           <div key={key}>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
@@ -464,7 +464,7 @@ function MeetingPrep() {
           </div>
         ))}
         <Btn onClick={generate} disabled={!form.company.trim() || loading}>
-          {loading ? "├ó┬Å┬│ Forbereder..." : "├░┼©┬ñ┬Ø Generer m├â┬©tebrief"}
+          {loading ? "Forbereder..." : "Generer møtebrief"}
         </Btn>
       </Card>
 
@@ -494,7 +494,7 @@ function LinkedIn() {
     setLoading(false);
   }
 
-  const suggestions = ["Skriv innlegg om interaktive skjermer i m├â┬©terom", "Lag en LinkedIn-overskrift for meg", "Innlegg om kassel├â┬©sning for restaurant", "Tips for ├â┬Ñ bygge nettverk i Tr├â┬©ndelag"];
+  const suggestions = ["Skriv innlegg om interaktive skjermer i møterom", "Lag en LinkedIn-overskrift for meg", "Innlegg om kasseløsning for restaurant", "Tips for å bygge nettverk i Trøndelag"];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, height: "100%" }}>
@@ -532,17 +532,17 @@ function LinkedIn() {
         <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }}} placeholder="Beskriv hva du vil lage..." rows={2}
           style={{ flex: 1, background: "transparent", border: "none", outline: "none", color: C.text, fontSize: 14, resize: "none", lineHeight: 1.6, paddingTop: 10, fontFamily: "inherit" }} />
         <button onClick={send} disabled={loading || !input.trim()}
-          style={{ padding: "10px 16px", background: loading || !input.trim() ? C.accentDim : "linear-gradient(135deg,#0ea5e9,#0077b5)", border: "none", borderRadius: 10, color: "#fff", fontSize: 18, cursor: "pointer", alignSelf: "flex-end", marginBottom: 4 }}>├óÔÇáÔÇÿ</button>
+          style={{ padding: "10px 16px", background: loading || !input.trim() ? C.accentDim : "linear-gradient(135deg,#0ea5e9,#0077b5)", border: "none", borderRadius: 10, color: "#fff", fontSize: 18, cursor: "pointer", alignSelf: "flex-end", marginBottom: 4 }}>{">"}</button>
       </div>
     </div>
   );
 }
 
-// ├óÔÇØÔé¼├óÔÇØÔé¼ APP SHELL ├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼├óÔÇØÔé¼
+//
 const NAV = [
   { id: "customers", label: "Kunder", icon: icons.customers },
   { id: "call", label: "Samtaleguide", icon: icons.call },
-  { id: "meeting", label: "M├â┬©teprep", icon: icons.meeting },
+  { id: "meeting", label: "Møteprep", icon: icons.meeting },
   { id: "linkedin", label: "LinkedIn", icon: icons.linkedin },
 ];
 
