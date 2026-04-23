@@ -13,49 +13,49 @@ async function callClaude(system, userMessage, history = []) {
 }
 
 //
-const CONTEXT = `Du jobber som AI-assistent for Saxvik Kontorsenter AS i Steinkjer, TrÃ¸ndelag.
-Saxvik selger: interaktive skjermer (mÃ¸terom, klasserom, auditorium), kasse- og betalingslÃ¸sninger, 
-postbehandling/makulering, arkivlÃ¸sninger, LED-skjermer, kontorteknologi. HovedleverandÃ¸r: Canon.
-Marked: bedrifter nord i TrÃ¸ndelag. Omsetning ~45 mill, 12 ansatte. Team Tek er tech-avdelingen.
-Skriv alltid pÃ¥ norsk. VÃ¦r konkret, ikke generell.`;
+const CONTEXT = `Du jobber som AI-assistent for Saxvik Kontorsenter AS i Steinkjer, Trøndelag.
+Saxvik selger: interaktive skjermer (møterom, klasserom, auditorium), kasse- og betalingsløsninger, 
+postbehandling/makulering, arkivløsninger, LED-skjermer, kontorteknologi. Hovedleverandør: Canon.
+Marked: bedrifter nord i Trøndelag. Omsetning ~45 mill, 12 ansatte. Team Tek er tech-avdelingen.
+Skriv alltid på norsk. Vær konkret, ikke generell.`;
 
 const SYSTEMS = {
   summary: `${CONTEXT}
-Du er referatskriver. GjÃ¸r rÃ¥notater om til et profesjonelt referat.
-Struktur: **MÃ¸te/dato** | **Tilstede** | **NÃ¸kkelpunkter** (bullet) | **Beslutninger** | **Handlingspunkter** (ansvarlig + frist) | **Neste steg**
+Du er referatskriver. Gjør rånotater om til et profesjonelt referat.
+Struktur: **Møte/dato** | **Tilstede** | **Nøkkelpunkter** (bullet) | **Beslutninger** | **Handlingspunkter** (ansvarlig + frist) | **Neste steg**
 Fyll ikke inn info som ikke er i notatene. Skriv [ikke oppgitt] der noe mangler.`,
 
   followup: `${CONTEXT}
-Du skriver oppfÃ¸lgingsmailer basert pÃ¥ mÃ¸tereferater. 
-Tonen skal vÃ¦re varm, profesjonell og personlig - ikke generisk selgermail.
-Struktur: Takk for mÃ¸tet -> oppsummer det viktigste kunden sa -> konkret neste steg -> enkel call to action.
+Du skriver oppfølgingsmailer basert på møtereferater. 
+Tonen skal være varm, profesjonell og personlig - ikke generisk selgermail.
+Struktur: Takk for møtet -> oppsummer det viktigste kunden sa -> konkret neste steg -> enkel call to action.
 Ikke overselg. Ikke bruk buzzwords. Maks 150 ord i selve mailen.
 Returner: EMNE: [emne]\n\n[mailinnhold]`,
 
   call: `${CONTEXT}
 Du er en erfaren salgscoach som lager tilpassede samtaleguider for selgere.
 Brukeren gir deg info om kunden/prospektet. Du lager:
-1. **Ã…pning** (15 sek, naturlig - ikke robotaktig)
-2. **3-4 Ã¥pne spÃ¸rsmÃ¥l** tilpasset kundens situasjon
+1. **�&pning** (15 sek, naturlig - ikke robotaktig)
+2. **3-4 åpne spørsmål** tilpasset kundens situasjon
 3. **Verdiforslag** for Saxvik rettet mot akkurat denne kunden
-4. **HÃ¥ndtering av vanlige innvendinger** (for dyrt / har lÃ¸sning / ikke tid)
-5. **Avslutning** - hvordan booke mÃ¸te eller neste steg
+4. **Håndtering av vanlige innvendinger** (for dyrt / har løsning / ikke tid)
+5. **Avslutning** - hvordan booke møte eller neste steg
 Tilpass ALT til bransje og situasjon. Ingen generiske fraser.`,
 
   meetingprep: `${CONTEXT}
-Du forbereder selgere til kundemÃ¸ter. Brukeren gir deg bedriftsnavn og eventuell info.
-Lag et mÃ¸tebrief med:
-1. **Hva vi vet om bedriften** (bransje, stÃ¸rrelse, trolig behov)
-2. **Mulige smertepunkter** Saxvik kan lÃ¸se
-3. **Anbefalte produkter/lÃ¸sninger Ã¥ presentere**
-4. **5 gode spÃ¸rsmÃ¥l Ã¥ stille i mÃ¸tet**
-5. **Hva du bÃ¸r unngÃ¥ Ã¥ si**
-6. **MÃ¥let for mÃ¸tet** - hva er en god utgang?
-VÃ¦r konkret og praktisk.`,
+Du forbereder selgere til kundemøter. Brukeren gir deg bedriftsnavn og eventuell info.
+Lag et møtebrief med:
+1. **Hva vi vet om bedriften** (bransje, størrelse, trolig behov)
+2. **Mulige smertepunkter** Saxvik kan løse
+3. **Anbefalte produkter/løsninger å presentere**
+4. **5 gode spørsmål å stille i møtet**
+5. **Hva du bør unngå å si**
+6. **Målet for møtet** - hva er en god utgang?
+Vær konkret og praktisk.`,
 
   linkedin: `${CONTEXT}
 Du er LinkedIn SEO-ekspert for B2B-selgere i Norge.
-NÃ¥r du lager innlegg: skriv for verdi ikke reklame, bruk linjeskift, avslutt med spÃ¸rsmÃ¥l, ingen lenker i innlegget.
+Når du lager innlegg: skriv for verdi ikke reklame, bruk linjeskift, avslutt med spørsmål, ingen lenker i innlegget.
 Returner alltid: [Innlegg] | [Hashtags 5-8 stk] | [Tips]`,
 };
 
@@ -149,12 +149,12 @@ function CustomerList({ customers, onSelect, onNew }) {
         <Btn onClick={onNew}>{icons.add} Ny kunde</Btn>
       </div>
 
-      <input value={search} onChange={e => setSearch(e.target.value)} placeholder="SÃ¸k kunde eller kontaktperson..."
+      <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Søk kunde eller kontaktperson..."
         style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "11px 16px", color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", width: "100%", boxSizing: "border-box" }} />
 
       {filtered.length === 0 && (
         <Card style={{ textAlign: "center", color: C.muted, padding: "40px 24px" }}>
-          {search ? "Ingen treff" : "Ingen kunder ennÃ¥ - legg til din fÃ¸rste!"}
+          {search ? "Ingen treff" : "Ingen kunder ennå - legg til din første!"}
         </Card>
       )}
 
@@ -165,7 +165,7 @@ function CustomerList({ customers, onSelect, onNew }) {
             onMouseLeave={e => e.currentTarget.style.background = C.surface}>
             <div>
               <div style={{ fontWeight: 700, color: "#e8f2ff", fontSize: 15 }}>{c.name}</div>
-              <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>{c.contact} {c.industry ? `Â· ${c.industry}` : ""}</div>
+              <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>{c.contact} {c.industry ? `· ${c.industry}` : ""}</div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
               <Tag label={c.status || "prospect"} color={statusColor[c.status] || C.accent} />
@@ -218,7 +218,7 @@ function NewCustomer({ onSave, onBack }) {
 
         <div>
           <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>Notater</div>
-          <Textarea value={form.notes} onChange={set("notes")} placeholder="FÃ¸rste inntrykk, potensial, hvordan ble de funnet..." rows={3} />
+          <Textarea value={form.notes} onChange={set("notes")} placeholder="Første inntrykk, potensial, hvordan ble de funnet..." rows={3} />
         </div>
       </Card>
 
@@ -276,7 +276,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
     setTab("logg");
   }
 
-  const detailTabs = ["logg", "nytt mÃ¸te"];
+  const detailTabs = ["logg", "nytt møte"];
   const statusColor = { prospect: "#f59e0b", aktiv: C.success, inaktiv: C.muted };
 
   return (
@@ -290,7 +290,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
             <Tag label={customer.status || "prospect"} color={statusColor[customer.status] || C.accent} />
           </div>
           <div style={{ fontSize: 13, color: C.muted, marginTop: 4 }}>
-            {[customer.contact, customer.phone, customer.email, customer.industry].filter(Boolean).join(" Â· ")}
+            {[customer.contact, customer.phone, customer.email, customer.industry].filter(Boolean).join(" · ")}
           </div>
         </div>
       </div>
@@ -300,7 +300,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
         {detailTabs.map(t => (
           <button key={t} onClick={() => setTab(t)}
             style={{ padding: "9px 18px", border: "none", background: "transparent", color: tab === t ? C.accent : C.muted, fontWeight: tab === t ? 700 : 400, fontSize: 14, cursor: "pointer", borderBottom: tab === t ? `2px solid ${C.accent}` : "2px solid transparent", fontFamily: "inherit", textTransform: "capitalize" }}>
-            {t === "logg" ? "Logg" : "Nytt mÃ¸te"}
+            {t === "logg" ? "Logg" : "Nytt møte"}
           </button>
         ))}
       </div>
@@ -315,7 +315,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
             </Card>
           )}
           {(customer.logs || []).length === 0 && !customer.notes && (
-            <Card style={{ textAlign: "center", color: C.muted, padding: "40px 24px" }}>Ingen mÃ¸ter logget ennÃ¥</Card>
+            <Card style={{ textAlign: "center", color: C.muted, padding: "40px 24px" }}>Ingen møter logget ennå</Card>
           )}
           {(customer.logs || []).map(log => (
             <Card key={log.id}>
@@ -325,7 +325,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
               <div style={{ fontSize: 14, color: C.text, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{log.summary}</div>
               {log.followup && (
                 <div style={{ marginTop: 14, paddingTop: 14, borderTop: `1px solid ${C.border}` }}>
-                  <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>{icons.mail} OppfÃ¸lgingsmail</div>
+                  <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>{icons.mail} Oppfølgingsmail</div>
                   <div style={{ fontSize: 13, color: "#9ab8cc", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{log.followup}</div>
                   <button onClick={() => copy(log.followup, log.id)} style={{ marginTop: 10, background: "none", border: `1px solid ${C.border}`, borderRadius: 8, color: C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer" }}>
                     {copied === log.id ? `${icons.check} Kopiert` : `${icons.copy} Kopier mail`}
@@ -338,10 +338,10 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
       )}
 
       {/* New meeting tab */}
-      {tab === "nytt mÃ¸te" && (
+      {tab === "nytt møte" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <Card>
-            <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>RÃ¥notater fra mÃ¸tet</div>
+            <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>Rånotater fra møtet</div>
             <Textarea value={noteInput} onChange={setNoteInput} placeholder={`Hva ble diskutert med ${customer.name}?\n- Problem de nevnte\n- Produkter som er aktuelle\n- Hvem bestemmer\n- Neste steg`} rows={6} />
           </Card>
 
@@ -350,7 +350,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
               {loading === "summary" ? "Genererer..." : "Generer referat"}
             </Btn>
             <Btn onClick={handleGenerateFollowup} disabled={(!noteInput.trim() && !summary.trim()) || loading === "followup"} variant="ghost">
-              {loading === "followup" ? "Ã³Ã… Skriver mail..." : `${icons.mail} Generer oppfÃ¸lgingsmail`}
+              {loading === "followup" ? "ó�& Skriver mail..." : `${icons.mail} Generer oppfølgingsmail`}
             </Btn>
           </div>
 
@@ -363,7 +363,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
 
           {followup && (
             <div>
-              <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>OppfÃ¸lgingsmail</div>
+              <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>Oppfølgingsmail</div>
               <ResultBox content={followup} onCopy={() => copy(followup, "fu")} copied={copied === "fu"} />
             </div>
           )}
@@ -388,7 +388,7 @@ function CallAssistant() {
   async function generate() {
     if (!form.company.trim()) return;
     setLoading(true);
-    const prompt = `Bedrift: ${form.company}\nBransje: ${form.industry || "ukjent"}\nStÃ¸rrelse: ${form.size || "ukjent"}\nKontekst: ${form.context || "kald kontakt"}\nAktuelt produkt/lÃ¸sning: ${form.product || "generell kartlegging"}`;
+    const prompt = `Bedrift: ${form.company}\nBransje: ${form.industry || "ukjent"}\nStørrelse: ${form.size || "ukjent"}\nKontekst: ${form.context || "kald kontakt"}\nAktuelt produkt/løsning: ${form.product || "generell kartlegging"}`;
     const res = await callClaude(SYSTEMS.call, prompt);
     setResult(res);
     setLoading(false);
@@ -398,16 +398,16 @@ function CallAssistant() {
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
         <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>Samtaleguide</div>
-        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>For cold calls, oppfÃ¸lging og kundedialog</div>
+        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>For cold calls, oppfølging og kundedialog</div>
       </div>
 
       <Card style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {[
           ["Bedrift / person *", "company", "Rema 1000 Steinkjer"],
           ["Bransje", "industry", "Dagligvare, skole, restaurant, industri..."],
-          ["StÃ¸rrelse", "size", "Liten, 10-50 ansatte, stor kjede..."],
-          ["Kontekst", "context", "Kald kontakt / oppfÃ¸lging etter mail / referral fra X"],
-          ["Aktuelt produkt", "product", "KasselÃ¸sning, interaktiv skjerm, mÃ¸teromsutstyr..."],
+          ["Størrelse", "size", "Liten, 10-50 ansatte, stor kjede..."],
+          ["Kontekst", "context", "Kald kontakt / oppfølging etter mail / referral fra X"],
+          ["Aktuelt produkt", "product", "Kasseløsning, interaktiv skjerm, møteromsutstyr..."],
         ].map(([label, key, ph]) => (
           <div key={key}>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
@@ -436,7 +436,7 @@ function MeetingPrep() {
   async function generate() {
     if (!form.company.trim()) return;
     setLoading(true);
-    const prompt = `Bedrift: ${form.company}\nKontaktperson: ${form.contact || "ukjent"}\nBransje: ${form.industry || "ukjent"}\nHva vi vet: ${form.known || "ingenting ennÃ¥"}\nMÃ¥l med mÃ¸tet: ${form.goal || "kartlegge behov"}`;
+    const prompt = `Bedrift: ${form.company}\nKontaktperson: ${form.contact || "ukjent"}\nBransje: ${form.industry || "ukjent"}\nHva vi vet: ${form.known || "ingenting ennå"}\nMål med møtet: ${form.goal || "kartlegge behov"}`;
     const res = await callClaude(SYSTEMS.meetingprep, prompt);
     setResult(res);
     setLoading(false);
@@ -445,8 +445,8 @@ function MeetingPrep() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
-        <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>MÃ¸teforberedelse</div>
-        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>Kom forberedt til hvert mÃ¸te</div>
+        <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>Møteforberedelse</div>
+        <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>Kom forberedt til hvert møte</div>
       </div>
 
       <Card style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -455,7 +455,7 @@ function MeetingPrep() {
           ["Kontaktperson", "contact", "Rektor / IT-ansvarlig"],
           ["Bransje", "industry", "Utdanning, helse, handel..."],
           ["Hva vi allerede vet", "known", "Ringte i forrige uke, interessert i skjermer..."],
-          ["MÃ¥l med mÃ¸tet", "goal", "Demo, behovskartlegging, tilbud..."],
+          ["Mål med møtet", "goal", "Demo, behovskartlegging, tilbud..."],
         ].map(([label, key, ph]) => (
           <div key={key}>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
@@ -464,7 +464,7 @@ function MeetingPrep() {
           </div>
         ))}
         <Btn onClick={generate} disabled={!form.company.trim() || loading}>
-          {loading ? "Forbereder..." : "Generer mÃ¸tebrief"}
+          {loading ? "Forbereder..." : "Generer møtebrief"}
         </Btn>
       </Card>
 
@@ -494,7 +494,7 @@ function LinkedIn() {
     setLoading(false);
   }
 
-  const suggestions = ["Skriv innlegg om interaktive skjermer i mÃ¸terom", "Lag en LinkedIn-overskrift for meg", "Innlegg om kasselÃ¸sning for restaurant", "Tips for Ã¥ bygge nettverk i TrÃ¸ndelag"];
+  const suggestions = ["Skriv innlegg om interaktive skjermer i møterom", "Lag en LinkedIn-overskrift for meg", "Innlegg om kasseløsning for restaurant", "Tips for å bygge nettverk i Trøndelag"];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, height: "100%" }}>
@@ -542,7 +542,7 @@ function LinkedIn() {
 const NAV = [
   { id: "customers", label: "Kunder", icon: icons.customers },
   { id: "call", label: "Samtaleguide", icon: icons.call },
-  { id: "meeting", label: "MÃ¸teprep", icon: icons.meeting },
+  { id: "meeting", label: "Møteprep", icon: icons.meeting },
   { id: "linkedin", label: "LinkedIn", icon: icons.linkedin },
 ];
 
