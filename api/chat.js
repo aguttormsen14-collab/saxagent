@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   try {
     const key = process.env.ANTHROPIC_API_KEY;
@@ -11,10 +11,9 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify(req.body),
     });
-    const text = await response.text();
-    res.setHeader("Content-Type", "application/json");
-    res.status(response.status).send(text);
+    const data = await response.json();
+    res.status(response.status).json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}
+};
