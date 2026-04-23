@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Users, Phone, Handshake, Linkedin, Plus, ArrowLeft, Mail, Save, Copy, Check, Trash2, Search, ChevronDown } from "lucide-react";
 
 //
 async function callClaude(system, userMessage, history = []) {
@@ -14,7 +15,7 @@ async function callClaude(system, userMessage, history = []) {
 
 //
 const CONTEXT = `Du jobber som AI-assistent for Saxvik Kontorsenter AS i Steinkjer, Trøndelag.
-Saxvik selger: interaktive skjermer (møterom, klasserom, auditorium), kasse- og betalingsløsninger, 
+Saxvik selger: interaktive skjermer (møterom, klasserom, auditorium), kasse- og betalingsløsninger,
 postbehandling/makulering, arkivløsninger, LED-skjermer, kontorteknologi. Hovedleverandør: Canon.
 Marked: bedrifter nord i Trøndelag. Omsetning ~45 mill, 12 ansatte. Team Tek er tech-avdelingen.
 Skriv alltid på norsk. Vær konkret, ikke generell.`;
@@ -26,7 +27,7 @@ Struktur: **Møte/dato** | **Tilstede** | **Nøkkelpunkter** (bullet) | **Beslut
 Fyll ikke inn info som ikke er i notatene. Skriv [ikke oppgitt] der noe mangler.`,
 
   followup: `${CONTEXT}
-Du skriver oppfølgingsmailer basert på møtereferater. 
+Du skriver oppfølgingsmailer basert på møtereferater.
 Tonen skal være varm, profesjonell og personlig - ikke generisk selgermail.
 Struktur: Takk for møtet -> oppsummer det viktigste kunden sa -> konkret neste steg -> enkel call to action.
 Ikke overselg. Ikke bruk buzzwords. Maks 150 ord i selve mailen.
@@ -35,7 +36,7 @@ Returner: EMNE: [emne]\n\n[mailinnhold]`,
   call: `${CONTEXT}
 Du er en erfaren salgscoach som lager tilpassede samtaleguider for selgere.
 Brukeren gir deg info om kunden/prospektet. Du lager:
-1. **�&pning** (15 sek, naturlig - ikke robotaktig)
+1. **Åpning** (15 sek, naturlig - ikke robotaktig)
 2. **3-4 åpne spørsmål** tilpasset kundens situasjon
 3. **Verdiforslag** for Saxvik rettet mot akkurat denne kunden
 4. **Håndtering av vanlige innvendinger** (for dyrt / har løsning / ikke tid)
@@ -69,8 +70,17 @@ function saveCustomers(list) {
 
 //
 const icons = {
-  customers: "K", call: "T", meeting: "M", linkedin: "L", notes: "N",
-  add: "+", back: "<-", mail: "@", save: "S", copy: "K", check: "OK", trash: "X",
+  customers: <Users size={15} />,
+  call: <Phone size={15} />,
+  meeting: <Handshake size={15} />,
+  linkedin: <Linkedin size={15} />,
+  add: <Plus size={14} />,
+  back: <ArrowLeft size={16} />,
+  mail: <Mail size={14} />,
+  save: <Save size={14} />,
+  copy: <Copy size={14} />,
+  check: <Check size={14} />,
+  trash: <Trash2 size={14} />,
 };
 
 //
@@ -105,7 +115,7 @@ function Btn({ children, onClick, disabled, variant = "primary", small }) {
 }
 
 function Card({ children, style }) {
-  return <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: "20px 24px", ...style }}>{children}</div>;
+  return <div className="card" style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: "20px 24px", ...style }}>{children}</div>;
 }
 
 function Tag({ label, color = C.accent }) {
@@ -114,7 +124,7 @@ function Tag({ label, color = C.accent }) {
 
 function Textarea({ value, onChange, placeholder, rows = 4 }) {
   return (
-    <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
+    <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows} className="input-field"
       style={{ width: "100%", background: "rgba(255,255,255,0.04)", border: `1px solid ${C.border}`, borderRadius: 12, padding: "14px 16px", color: C.text, fontSize: 14, lineHeight: 1.7, resize: "vertical", outline: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
   );
 }
@@ -122,10 +132,10 @@ function Textarea({ value, onChange, placeholder, rows = 4 }) {
 function ResultBox({ content, onCopy, copied }) {
   if (!content) return null;
   return (
-    <div style={{ background: "rgba(14,165,233,0.06)", border: `1px solid ${C.accentBorder}`, borderRadius: 14, padding: "20px 22px", position: "relative" }}>
+    <div className="fade-in" style={{ background: "rgba(14,165,233,0.06)", border: `1px solid ${C.accentBorder}`, borderRadius: 14, padding: "20px 22px", position: "relative" }}>
       <div style={{ fontSize: 14, lineHeight: 1.8, color: C.text, whiteSpace: "pre-wrap" }}>{content}</div>
-      <button onClick={onCopy} style={{ position: "absolute", top: 14, right: 14, background: copied ? C.successDim : "rgba(255,255,255,0.07)", border: `1px solid ${copied ? "rgba(34,197,94,0.3)" : C.border}`, borderRadius: 8, color: copied ? C.success : C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer", transition: "all 0.2s" }}>
-        {copied ? `${icons.check} Kopiert` : `${icons.copy} Kopier`}
+      <button onClick={onCopy} style={{ position: "absolute", top: 14, right: 14, background: copied ? C.successDim : "rgba(255,255,255,0.07)", border: `1px solid ${copied ? "rgba(34,197,94,0.3)" : C.border}`, borderRadius: 8, color: copied ? C.success : C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: 5 }}>
+        {copied ? <>{icons.check} Kopiert</> : <>{icons.copy} Kopier</>}
       </button>
     </div>
   );
@@ -140,7 +150,7 @@ function CustomerList({ customers, onSelect, onNew }) {
   const statusColor = { prospect: "#f59e0b", aktiv: C.success, inaktiv: C.muted };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+    <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>Kundelogg</div>
@@ -150,6 +160,7 @@ function CustomerList({ customers, onSelect, onNew }) {
       </div>
 
       <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Søk kunde eller kontaktperson..."
+        className="input-field"
         style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "11px 16px", color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", width: "100%", boxSizing: "border-box" }} />
 
       {filtered.length === 0 && (
@@ -161,8 +172,8 @@ function CustomerList({ customers, onSelect, onNew }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {filtered.map(c => (
           <div key={c.id} onClick={() => onSelect(c)} style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, padding: "16px 20px", cursor: "pointer", transition: "all 0.18s", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-            onMouseEnter={e => e.currentTarget.style.background = C.surfaceHover}
-            onMouseLeave={e => e.currentTarget.style.background = C.surface}>
+            onMouseEnter={e => { e.currentTarget.style.background = C.surfaceHover; e.currentTarget.style.transform = "scale(1.01)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(14,165,233,0.1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = C.surface; e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; }}>
             <div>
               <div style={{ fontWeight: 700, color: "#e8f2ff", fontSize: 15 }}>{c.name}</div>
               <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>{c.contact} {c.industry ? `· ${c.industry}` : ""}</div>
@@ -199,7 +210,7 @@ function NewCustomer({ onSave, onBack }) {
         {[["Bedriftsnavn *", "name", "Rema 1000 Steinkjer"], ["Kontaktperson", "contact", "Ola Nordmann"], ["Telefon", "phone", "+47 900 00 000"], ["E-post", "email", "ola@bedrift.no"], ["Bransje", "industry", "Dagligvare, restaurant, skole..."]].map(([label, key, ph]) => (
           <div key={key}>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
-            <input value={form[key]} onChange={e => set(key)(e.target.value)} placeholder={ph}
+            <input value={form[key]} onChange={e => set(key)(e.target.value)} placeholder={ph} className="input-field"
               style={{ width: "100%", background: "rgba(255,255,255,0.04)", border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 14px", color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
           </div>
         ))}
@@ -280,7 +291,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
   const statusColor = { prospect: "#f59e0b", aktiv: C.success, inaktiv: C.muted };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+    <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       {/* Header */}
       <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
         <button onClick={onBack} style={{ background: "none", border: "none", color: C.muted, fontSize: 20, cursor: "pointer", marginTop: 4 }}>{icons.back}</button>
@@ -325,10 +336,10 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
               <div style={{ fontSize: 14, color: C.text, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{log.summary}</div>
               {log.followup && (
                 <div style={{ marginTop: 14, paddingTop: 14, borderTop: `1px solid ${C.border}` }}>
-                  <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8 }}>{icons.mail} Oppfølgingsmail</div>
+                  <div style={{ fontSize: 12, color: C.muted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.8, display: "flex", alignItems: "center", gap: 5 }}>{icons.mail} Oppfølgingsmail</div>
                   <div style={{ fontSize: 13, color: "#9ab8cc", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{log.followup}</div>
-                  <button onClick={() => copy(log.followup, log.id)} style={{ marginTop: 10, background: "none", border: `1px solid ${C.border}`, borderRadius: 8, color: C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer" }}>
-                    {copied === log.id ? `${icons.check} Kopiert` : `${icons.copy} Kopier mail`}
+                  <button onClick={() => copy(log.followup, log.id)} style={{ marginTop: 10, background: "none", border: `1px solid ${C.border}`, borderRadius: 8, color: C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: 5 }}>
+                    {copied === log.id ? <>{icons.check} Kopiert</> : <>{icons.copy} Kopier mail</>}
                   </button>
                 </div>
               )}
@@ -350,7 +361,7 @@ function CustomerDetail({ customer, onBack, onUpdate }) {
               {loading === "summary" ? "Genererer..." : "Generer referat"}
             </Btn>
             <Btn onClick={handleGenerateFollowup} disabled={(!noteInput.trim() && !summary.trim()) || loading === "followup"} variant="ghost">
-              {loading === "followup" ? "ó�& Skriver mail..." : `${icons.mail} Generer oppfølgingsmail`}
+              {loading === "followup" ? "Skriver mail..." : <>{icons.mail} Generer oppfølgingsmail</>}
             </Btn>
           </div>
 
@@ -395,7 +406,7 @@ function CallAssistant() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+    <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
         <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>Samtaleguide</div>
         <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>For cold calls, oppfølging og kundedialog</div>
@@ -411,7 +422,7 @@ function CallAssistant() {
         ].map(([label, key, ph]) => (
           <div key={key}>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
-            <input value={form[key]} onChange={e => set(key)(e.target.value)} placeholder={ph}
+            <input value={form[key]} onChange={e => set(key)(e.target.value)} placeholder={ph} className="input-field"
               style={{ width: "100%", background: "rgba(255,255,255,0.04)", border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 14px", color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
           </div>
         ))}
@@ -443,7 +454,7 @@ function MeetingPrep() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+    <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
         <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>Møteforberedelse</div>
         <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>Kom forberedt til hvert møte</div>
@@ -459,7 +470,7 @@ function MeetingPrep() {
         ].map(([label, key, ph]) => (
           <div key={key}>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
-            <input value={form[key]} onChange={e => set(key)(e.target.value)} placeholder={ph}
+            <input value={form[key]} onChange={e => set(key)(e.target.value)} placeholder={ph} className="input-field"
               style={{ width: "100%", background: "rgba(255,255,255,0.04)", border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 14px", color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
           </div>
         ))}
@@ -497,7 +508,7 @@ function LinkedIn() {
   const suggestions = ["Skriv innlegg om interaktive skjermer i møterom", "Lag en LinkedIn-overskrift for meg", "Innlegg om kasseløsning for restaurant", "Tips for å bygge nettverk i Trøndelag"];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, height: "100%" }}>
+    <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 16, height: "100%" }}>
       <div>
         <div style={{ fontSize: 22, fontWeight: 800, color: "#f0f6ff", letterSpacing: "-0.5px" }}>LinkedIn SEO</div>
         <div style={{ fontSize: 13, color: C.muted, marginTop: 3 }}>Innlegg, profiltekst og hashtags</div>
@@ -524,12 +535,17 @@ function LinkedIn() {
             </div>
           </div>
         ))}
-        {loading && <div style={{ display: "flex", gap: 5, padding: 8 }}>{[0,1,2].map(d => <div key={d} style={{ width: 7, height: 7, borderRadius: "50%", background: C.accent, animation: "pulse 1.2s ease-in-out infinite", animationDelay: `${d*0.2}s` }} />)}</div>}
+        {loading && (
+          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", background: "rgba(14,165,233,0.06)", borderRadius: 12, border: "1px solid rgba(14,165,233,0.15)" }}>
+            <div style={{ width: 16, height: 16, border: "2px solid rgba(14,165,233,0.3)", borderTop: "2px solid #0ea5e9", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+            <span style={{ fontSize: 13, color: "#4a8aaa" }}>Genererer svar...</span>
+          </div>
+        )}
         <div ref={endRef} />
       </div>
 
       <div style={{ display: "flex", gap: 8, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, padding: "4px 4px 4px 14px" }}>
-        <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }}} placeholder="Beskriv hva du vil lage..." rows={2}
+        <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }}} placeholder="Beskriv hva du vil lage..." rows={2} className="input-field"
           style={{ flex: 1, background: "transparent", border: "none", outline: "none", color: C.text, fontSize: 14, resize: "none", lineHeight: 1.6, paddingTop: 10, fontFamily: "inherit" }} />
         <button onClick={send} disabled={loading || !input.trim()}
           style={{ padding: "10px 16px", background: loading || !input.trim() ? C.accentDim : "linear-gradient(135deg,#0ea5e9,#0077b5)", border: "none", borderRadius: 10, color: "#fff", fontSize: 18, cursor: "pointer", alignSelf: "flex-end", marginBottom: 4 }}>{">"}</button>
@@ -583,12 +599,25 @@ export default function App() {
       {/* Top bar */}
       <div style={{ padding: "18px 24px 0", borderBottom: `1px solid ${C.border}`, background: C.bg }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 9, background: "linear-gradient(135deg,#0ea5e9,#0077b5)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 15, color: "#fff", boxShadow: "0 4px 14px rgba(14,165,233,0.35)" }}>S</div>
+          <div style={{
+            width: 36, height: 36, borderRadius: 10,
+            background: "linear-gradient(135deg, #0ea5e9, #0077b5)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: "0 4px 14px rgba(14,165,233,0.4)",
+            overflow: "hidden"
+          }}>
+            <img
+              src="https://saxvik.no/favicon.ico"
+              alt="Saxvik"
+              style={{ width: 24, height: 24, objectFit: "contain" }}
+              onError={e => { e.target.style.display = "none"; e.target.parentNode.innerHTML = "<span style='color:#fff;font-weight:800;font-size:15px'>S</span>"; }}
+            />
+          </div>
           <div style={{ fontSize: 15, fontWeight: 800, color: "#e8f4ff", letterSpacing: "-0.3px" }}>Saxvik Salgsassistent</div>
         </div>
-        <div style={{ display: "flex", gap: 2 }}>
+        <div className="nav-bar" style={{ display: "flex", gap: 2 }}>
           {NAV.map(n => (
-            <button key={n.id} onClick={() => { setView(n.id); setSelected(null); setAdding(false); }}
+            <button key={n.id} onClick={() => { setView(n.id); setSelected(null); setAdding(false); }} className="nav-button"
               style={{ padding: "9px 16px", border: "none", background: "transparent", color: view === n.id ? C.accent : C.muted, fontWeight: view === n.id ? 700 : 400, fontSize: 13, cursor: "pointer", borderBottom: view === n.id ? `2px solid ${C.accent}` : "2px solid transparent", fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6, whiteSpace: "nowrap" }}>
               <span>{n.icon}</span> {n.label}
             </button>
@@ -597,20 +626,30 @@ export default function App() {
       </div>
 
       {/* Main content */}
-      <div style={{ flex: 1, padding: "28px 24px", maxWidth: 860, width: "100%", margin: "0 auto", boxSizing: "border-box", overflowY: "auto" }}>
+      <div className="main-content" style={{ flex: 1, padding: "28px 24px", maxWidth: 860, width: "100%", margin: "0 auto", boxSizing: "border-box", overflowY: "auto" }}>
         {renderMain()}
       </div>
 
       <style>{`
         @keyframes pulse { 0%,100%{opacity:.3;transform:scale(.8)} 50%{opacity:1;transform:scale(1)} }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        .fade-in { animation: fadeIn 0.25s ease forwards; }
+        .slide-in { animation: slideIn 0.2s ease forwards; }
         *{box-sizing:border-box}
         ::-webkit-scrollbar{width:4px}
         ::-webkit-scrollbar-track{background:transparent}
         ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
         input::placeholder,textarea::placeholder{color:#2a4a5e}
+        @media (max-width: 768px) {
+          .nav-bar { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+          .nav-button { padding: 8px 10px !important; font-size: 12px !important; }
+          .main-content { padding: 16px 14px !important; }
+          .card { padding: 14px 16px !important; }
+          .input-field { font-size: 16px !important; }
+        }
       `}</style>
     </div>
   );
 }
-
-
