@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Users, Phone, Handshake, Linkedin, Plus, ArrowLeft, Mail, Save, Copy, Check, Trash2, Search, ChevronDown } from "lucide-react";
+import { Users, Phone, Handshake, Share2, Plus, ArrowLeft, Mail, Save, Copy, Check, Trash2, Search, ChevronDown } from "lucide-react";
 
 //
 async function callClaude(system, userMessage, history = []) {
@@ -73,7 +73,7 @@ const icons = {
   customers: <Users size={15} />,
   call: <Phone size={15} />,
   meeting: <Handshake size={15} />,
-  linkedin: <Linkedin size={15} />,
+  linkedin: <Share2 size={15} />,
   add: <Plus size={14} />,
   back: <ArrowLeft size={16} />,
   mail: <Mail size={14} />,
