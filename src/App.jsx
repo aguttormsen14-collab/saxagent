@@ -442,7 +442,48 @@ function MeetingPrep() {
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [brregResults, setBrregResults] = useState([]);
+  const [brregLoading, setBrregLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const set = k => v => setForm(f => ({ ...f, [k]: v }));
+
+  async function searchBrreg() {
+    if (!form.company.trim() || form.company.length < 2) return;
+    setBrregLoading(true);
+    setBrregResults([]);
+    try {
+      const res = await fetch(`https://data.brreg.no/enhetsregisteret/api/enheter?navn=${encodeURIComponent(form.company)}&size=6`);
+      const data = await res.json();
+      setBrregResults(data._embedded?.enheter || []);
+      setShowDropdown(true);
+    } catch {
+      setBrregResults([]);
+    }
+    setBrregLoading(false);
+  }
+
+  function selectBrregCompany(enhet) {
+    const industry = enhet.naeringskode1?.beskrivelse || "";
+    const employees = enhet.antallAnsatte;
+    const sizeText = employees != null ? `${employees} ansatte` : "";
+    const poststed = enhet.forretningsadresse?.poststed || "";
+    const orgForm = enhet.organisasjonsform?.beskrivelse || "";
+    const knownParts = [
+      enhet.organisasjonsnummer ? `Org.nr: ${enhet.organisasjonsnummer}` : "",
+      orgForm ? `Selskapsform: ${orgForm}` : "",
+      poststed ? `Sted: ${poststed}` : "",
+    ].filter(Boolean).join(" · ");
+
+    setForm(f => ({
+      ...f,
+      company: enhet.navn,
+      industry: industry || f.industry,
+      size: sizeText || f.size,
+      known: [knownParts, f.known].filter(Boolean).join("\n"),
+    }));
+    setShowDropdown(false);
+    setBrregResults([]);
+  }
 
   async function generate() {
     if (!form.company.trim()) return;
@@ -461,8 +502,58 @@ function MeetingPrep() {
       </div>
 
       <Card style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {/* Company field with Brreg search */}
+        <div style={{ position: "relative" }}>
+          <div style={{ fontSize: 12, color: C.muted, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 }}>Bedrift *</div>
+          <div style={{ display: "flex", gap: 8 }}>
+            <input
+              value={form.company}
+              onChange={e => { set("company")(e.target.value); setShowDropdown(false); }}
+              onKeyDown={e => { if (e.key === "Enter") searchBrreg(); }}
+              placeholder="Steinkjer VGS"
+              className="input-field"
+              style={{ flex: 1, background: "rgba(255,255,255,0.04)", border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 14px", color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", boxSizing: "border-box" }}
+            />
+            <button
+              onClick={searchBrreg}
+              disabled={brregLoading || !form.company.trim()}
+              title="Søk i Brønnøysundregistrene"
+              style={{ padding: "10px 14px", borderRadius: 10, border: `1px solid ${C.accentBorder}`, background: C.accentDim, color: C.accent, fontSize: 13, fontWeight: 600, cursor: brregLoading || !form.company.trim() ? "not-allowed" : "pointer", whiteSpace: "nowrap", opacity: brregLoading || !form.company.trim() ? 0.5 : 1 }}>
+              {brregLoading ? "Søker..." : "Søk Brreg"}
+            </button>
+          </div>
+
+          {showDropdown && brregResults.length > 0 && (
+            <div style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 100, marginTop: 4, background: "#0b1829", border: `1px solid ${C.accentBorder}`, borderRadius: 12, overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.5)" }}>
+              {brregResults.map(enhet => (
+                <button
+                  key={enhet.organisasjonsnummer}
+                  onClick={() => selectBrregCompany(enhet)}
+                  style={{ width: "100%", textAlign: "left", padding: "12px 16px", background: "transparent", border: "none", borderBottom: `1px solid ${C.border}`, color: C.text, cursor: "pointer", fontFamily: "inherit" }}
+                  onMouseEnter={e => e.currentTarget.style.background = C.accentDim}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{enhet.navn}</div>
+                  <div style={{ fontSize: 12, color: C.muted, marginTop: 2 }}>
+                    {[enhet.organisasjonsnummer, enhet.organisasjonsform?.beskrivelse, enhet.forretningsadresse?.poststed, enhet.antallAnsatte != null ? `${enhet.antallAnsatte} ansatte` : ""].filter(Boolean).join(" · ")}
+                  </div>
+                </button>
+              ))}
+              <button
+                onClick={() => setShowDropdown(false)}
+                style={{ width: "100%", padding: "9px 16px", background: "transparent", border: "none", color: C.muted, fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>
+                Lukk
+              </button>
+            </div>
+          )}
+
+          {showDropdown && !brregLoading && brregResults.length === 0 && (
+            <div style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 100, marginTop: 4, background: "#0b1829", border: `1px solid ${C.border}`, borderRadius: 12, padding: "14px 16px", color: C.muted, fontSize: 13 }}>
+              Ingen treff i Brreg
+            </div>
+          )}
+        </div>
+
         {[
-          ["Bedrift *", "company", "Steinkjer VGS"],
           ["Kontaktperson", "contact", "Rektor / IT-ansvarlig"],
           ["Bransje", "industry", "Utdanning, helse, handel..."],
           ["Hva vi allerede vet", "known", "Ringte i forrige uke, interessert i skjermer..."],
