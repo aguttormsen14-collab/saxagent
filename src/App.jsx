@@ -129,11 +129,47 @@ function Textarea({ value, onChange, placeholder, rows = 4 }) {
   );
 }
 
+function Markdown({ text }) {
+  function parseInline(str) {
+    const result = [];
+    const regex = /\*\*(.+?)\*\*|\*(.+?)\*/g;
+    let last = 0, m, k = 0;
+    while ((m = regex.exec(str)) !== null) {
+      if (m.index > last) result.push(str.slice(last, m.index));
+      if (m[1] != null) result.push(<strong key={k++} style={{ color: "#e8f4ff", fontWeight: 700 }}>{m[1]}</strong>);
+      else result.push(<em key={k++}>{m[2]}</em>);
+      last = m.index + m[0].length;
+    }
+    if (last < str.length) result.push(str.slice(last));
+    return result.length === 1 ? result[0] : result;
+  }
+
+  return (
+    <div>
+      {text.split("\n").map((line, i) => {
+        if (line.trim() === "---") return <hr key={i} style={{ border: "none", borderTop: `1px solid ${C.border}`, margin: "10px 0" }} />;
+        const h3 = line.match(/^###\s+(.*)/);
+        if (h3) return <div key={i} style={{ fontSize: 12, fontWeight: 800, color: C.accent, marginTop: 16, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.8 }}>{parseInline(h3[1])}</div>;
+        const h2 = line.match(/^##\s+(.*)/);
+        if (h2) return <div key={i} style={{ fontSize: 15, fontWeight: 800, color: "#e8f4ff", marginTop: 16, marginBottom: 6 }}>{parseInline(h2[1])}</div>;
+        const h1 = line.match(/^#\s+(.*)/);
+        if (h1) return <div key={i} style={{ fontSize: 17, fontWeight: 800, color: "#e8f4ff", marginTop: 18, marginBottom: 8 }}>{parseInline(h1[1])}</div>;
+        if (line.trim() === "") return <div key={i} style={{ height: 8 }} />;
+        const li = line.match(/^[-*]\s+(.*)/);
+        if (li) return <div key={i} style={{ display: "flex", gap: 8, marginBottom: 3 }}><span style={{ color: C.accent, flexShrink: 0 }}>·</span><span>{parseInline(li[1])}</span></div>;
+        const num = line.match(/^(\d+)\.\s+(.*)/);
+        if (num) return <div key={i} style={{ display: "flex", gap: 8, marginBottom: 4 }}><span style={{ color: C.accent, fontWeight: 700, flexShrink: 0 }}>{num[1]}.</span><span>{parseInline(num[2])}</span></div>;
+        return <div key={i} style={{ marginBottom: 2, lineHeight: 1.7 }}>{parseInline(line)}</div>;
+      })}
+    </div>
+  );
+}
+
 function ResultBox({ content, onCopy, copied }) {
   if (!content) return null;
   return (
     <div className="fade-in" style={{ background: "rgba(14,165,233,0.06)", border: `1px solid ${C.accentBorder}`, borderRadius: 14, padding: "20px 22px", position: "relative" }}>
-      <div style={{ fontSize: 14, lineHeight: 1.8, color: C.text, whiteSpace: "pre-wrap", paddingRight: 90 }}>{content}</div>
+      <div style={{ fontSize: 14, color: C.text, paddingRight: 90 }}><Markdown text={content} /></div>
       <button onClick={onCopy} style={{ position: "absolute", top: 14, right: 14, background: copied ? C.successDim : "rgba(255,255,255,0.07)", border: `1px solid ${copied ? "rgba(34,197,94,0.3)" : C.border}`, borderRadius: 8, color: copied ? C.success : C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: 5 }}>
         {copied ? <>{icons.check} Kopiert</> : <>{icons.copy} Kopier</>}
       </button>
@@ -686,7 +722,7 @@ export default function App() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: C.bg, fontFamily: "'DM Sans','Segoe UI',sans-serif", color: C.text, display: "flex", flexDirection: "column" }}>
+    <div style={{ height: "100vh", background: C.bg, fontFamily: "'DM Sans','Segoe UI',sans-serif", color: C.text, display: "flex", flexDirection: "column", overflow: "hidden" }}>
       {/* Top bar */}
       <div style={{ padding: "18px 24px 0", borderBottom: `1px solid ${C.border}`, background: C.bg }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
@@ -717,7 +753,7 @@ export default function App() {
       </div>
 
       {/* Main content */}
-      <div className="main-content" style={{ flex: 1, padding: "28px 24px", maxWidth: 860, width: "100%", margin: "0 auto", boxSizing: "border-box", overflowY: "auto" }}>
+      <div className="main-content" style={{ flex: 1, minHeight: 0, padding: "28px 24px", maxWidth: 860, width: "100%", margin: "0 auto", boxSizing: "border-box", overflowY: "auto" }}>
         {renderMain()}
       </div>
 
