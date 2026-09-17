@@ -7,7 +7,7 @@ async function callClaude(system, userMessage, history = []) {
   const res = await fetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 1000, system, messages }),
+    body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 2500, system, messages }),
   });
   const data = await res.json();
   return data.content?.map(b => b.text || "").join("") || "Ingen respons.";
