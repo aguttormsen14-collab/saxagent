@@ -133,7 +133,7 @@ function ResultBox({ content, onCopy, copied }) {
   if (!content) return null;
   return (
     <div className="fade-in" style={{ background: "rgba(14,165,233,0.06)", border: `1px solid ${C.accentBorder}`, borderRadius: 14, padding: "20px 22px", position: "relative" }}>
-      <div style={{ fontSize: 14, lineHeight: 1.8, color: C.text, whiteSpace: "pre-wrap" }}>{content}</div>
+      <div style={{ fontSize: 14, lineHeight: 1.8, color: C.text, whiteSpace: "pre-wrap", paddingRight: 90 }}>{content}</div>
       <button onClick={onCopy} style={{ position: "absolute", top: 14, right: 14, background: copied ? C.successDim : "rgba(255,255,255,0.07)", border: `1px solid ${copied ? "rgba(34,197,94,0.3)" : C.border}`, borderRadius: 8, color: copied ? C.success : C.muted, fontSize: 12, padding: "5px 12px", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: 5 }}>
         {copied ? <>{icons.check} Kopiert</> : <>{icons.copy} Kopier</>}
       </button>
